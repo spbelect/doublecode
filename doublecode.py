@@ -12,10 +12,7 @@ SRCDIR = environ.Path(__file__) - 1  # ./
 env = environ.Env()
 env.read_env(SRCDIR('env-local'))
 
-#client = httpx.Client()
-
 if 'CSV_PAIRS_URL' in env:
-    print(env('CSV_PAIRS_URL'))
     response = httpx.get(env('CSV_PAIRS_URL').strip(), timeout=25)
     codes = dict(csvreader(response.text.splitlines(), delimiter=','))
     #codes = dict(csvreader('a,b\nc,d'.splitlines(), delimiter=','))
