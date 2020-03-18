@@ -13,15 +13,20 @@
 
     <script type="text/javascript">
       $(function() {
-        $('body').on('click', '#get', function(e) {
-          $.get('/getvalue/'+$('#code').val(), function(data){
+        function get_code() {
+          $.get('/getvalue/'+$('#code').val(), function(data) {
             if(data == null) {
               $('#result').html('Код не найден');
             } else {
               $('#result').html('Ваш код:<br/>'+data);
             }
           })
-        })
+        }
+        $('body').on('submit', 'form', function(){
+          get_code()
+          return false;
+        });
+        $('body').on('click', '#get', get_code)
       });
     </script>
   </head>
