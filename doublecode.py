@@ -21,7 +21,7 @@ app = responder.API()
 
 @app.route("/")
 async def home(req, resp):
-    resp.content = app.template('home.html', env=env)
+    resp.content = app.template('home.html')
 
 @app.route("/getvalue/{key}")
 async def get(req, resp, *, key: str):
