@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import json
-from collections import namedtuple, defaultdict
 from csv import reader as csvreader
 
 import responder
