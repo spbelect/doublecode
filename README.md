@@ -17,14 +17,20 @@ pip install -r requirements.txt
 
 ## Local deploy
 
-Создать файл `env-local` со ссылкой на csv вида:
+Создать файл `env-local` с адресом redis сервера и ссылкой на csv вида:
 
 ```
-CSV_PAIRS_URL=https://gist.githubusercontent.com/Fak3/976b78e1a97bbd78a20dfc5bd295254e/raw/example.csv 
+CSV_PAIRS_URL=https://gist.githubusercontent.com/Fak3/976b78e1a97bbd78a20dfc5bd295254e/raw/example.csv
+REDIS_URL=redis://localhost:6379
 ```
 
-Запустить
+Запустить redis
 
+```
+docker-compose -f redis.yml up
+```
+
+Запустить веб-сервер
 ```
 python ./doublecode.py
 ```

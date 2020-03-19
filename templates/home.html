@@ -15,10 +15,14 @@
       $(function() {
         function get_code() {
           $.get('/getvalue/'+$('#code').val(), function(data) {
-            if(data == null) {
+            if(data.error) {
+              $('#result').html('Ошибка<br/>'+data.error);
+            }
+            else if(data.value == null) {
               $('#result').html('Код не найден');
-            } else {
-              $('#result').html('Ваш код:<br/>'+data);
+            } 
+            else {
+              $('#result').html('Ваш код:<br/>'+data.value);
             }
           })
         }

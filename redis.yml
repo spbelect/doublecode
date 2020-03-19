@@ -1,0 +1,10 @@
+version: "3.3"
+
+services:
+  local-redis:
+    container_name: local-redis
+    image: redis:4.0-alpine
+ 
+    ports:
+      - target: 6379 # inside container
+        published: 6379
