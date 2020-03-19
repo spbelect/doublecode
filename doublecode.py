@@ -17,7 +17,8 @@ db = redis.Redis.from_url(env('REDIS_URL'))
 
 if 'CSV_PAIRS_URL' in env:
     response = httpx.get(env('CSV_PAIRS_URL').strip(), timeout=25)
-    codes = dict(csvreader(response.text.splitlines(), delimiter=','))
+    csv = csvreader(response.text.splitlines(), delimiter=',')
+    codes = dict((key.replace('-', ''), val) for key, val in csv)
     #codes = dict(csvreader('a,b\nc,d'.splitlines(), delimiter=','))
         
 app = responder.API()
@@ -30,12 +31,14 @@ async def home(req, resp):
 
 @app.route("/getvalue/{key}")
 async def get(req, resp, *, key: str):
-    #print(db.get(key))
+    key = key.replace('-', '')
     if db.get(key) == b'obtained':
         resp.media = {'error': 'Этот код уже был использован'}
     else:
-        db.set(key, 'obtained')  # Отметить как использованый.
-        resp.media = {'value': codes.get(key)}
+        value = codes.get(key)
+        if value:
+            db.set(key, 'obtained')  # Отметить как использованый.
+        resp.media = {'value': value}
 
             
 if __name__ == '__main__':
