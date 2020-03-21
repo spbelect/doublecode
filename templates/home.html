@@ -22,7 +22,7 @@
               $('#result').html('Код не найден');
             } 
             else {
-              $('#result').html('Ваш код:<br/>'+data.value);
+              $('#result').html('Ваш код для голосования:<br/>'+data.value+'<br/><br/>Обязательно сохраните до момента голосования.  Второй раз его получить по вашему ключу 1 невозможно');
             }
           })
         }
@@ -40,8 +40,8 @@
       <div bp="6@lg offset-4@lg 10 offset-2 text-center">
         <form>
           <div class="form-group">
-            <label for="code">Введите код</label>
-            <input type="text" class="form-control" id="code" aria-describedby="codeHelp" placeholder="Введите код">
+            <label for="code">Введите ключ 1</label>
+            <input type="text" class="form-control" id="code" aria-describedby="codeHelp" placeholder="Введите ключ 1">
           </div>
           <div class="form-group">
             <button id="get" type="button" class="btn btn-primary"> Получить </button>
