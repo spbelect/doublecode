@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import json
 from csv import reader as csvreader
+from random import randint
 
 import responder
 import httpx
@@ -32,7 +33,9 @@ async def home(req, resp):
 @app.route("/getvalue/{key}")
 async def get(req, resp, *, key: str):
     key = key.replace('-', '')
-    if db.get(key) == b'obtained':
+    if key == 'test':
+        resp.media = {'value': str(randint(0, 9999))}
+    elif db.get(key) == b'obtained':
         resp.media = {'error': 'Этот код уже был использован'}
     else:
         value = codes.get(key)
